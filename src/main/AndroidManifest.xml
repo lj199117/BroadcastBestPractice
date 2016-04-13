@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.hnu.broadcastbestpractice" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".MainActivity"></activity>
+        <!--
+            BaseActivity 不需注册
+            <activity android:name=".BaseActivity"/>
+        -->
+        <receiver android:name="com.hnu.broadcast.ForceOfflineReceiver">
+            <intent-filter>
+                <action android:name="com.hnu.broadcast.FORCE_OFFLINE"></action>
+            </intent-filter>
+        </receiver>
+    </application>
+    <!--由于我们在ForceOfflineReceiver 里弹出了一个系统级别
+        的对话框，因此必须要声明android.permission.SYSTEM_ALERT_WINDOW 权限-->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+</manifest>
